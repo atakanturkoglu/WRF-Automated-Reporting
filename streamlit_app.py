@@ -2,8 +2,9 @@
 WRF İstanbul — Otomatik Meteoroloji Panosu
 ============================================
 Altay HPC üzerinde günlük olarak üretilen WRF-ARW çıktılarını gösteren
-Streamlit dashboard'u. Veriler `data/latest/` altında, Altay'daki otomasyon
-tarafından her gün üzerine yazılır (bkz. WRF/slurm/08_yayinla.slurm).
+Streamlit dashboard'u. Her simülasyon tarihi `data/archive/YYYY-MM-DD/`
+altında arşivlenir; Altay'daki otomasyon her gün yeni bir tarih klasörü ekler
+(bkz. WRF/slurm/08_yayinla.slurm).
 """
 import json
 from datetime import datetime
@@ -13,7 +14,7 @@ import streamlit as st
 
 st.set_page_config(page_title="WRF İstanbul", page_icon="🌦️", layout="wide")
 
-DATA_DIR = Path(__file__).parent / "data" / "latest"
+ARCHIVE_ROOT = Path(__file__).parent / "data" / "archive"
 
 st.markdown(
     """
@@ -29,8 +30,15 @@ st.markdown(
 
 
 @st.cache_data(ttl=300)
-def load_manifest():
-    path = DATA_DIR / "manifest.json"
+def list_archive_dates():
+    if not ARCHIVE_ROOT.exists():
+        return []
+    return sorted([p.name for p in ARCHIVE_ROOT.iterdir() if p.is_dir()], reverse=True)
+
+
+@st.cache_data(ttl=300)
+def load_manifest(date_str: str):
+    path = ARCHIVE_ROOT / date_str / "manifest.json"
     if not path.exists():
         return None
     return json.loads(path.read_text())
@@ -41,24 +49,36 @@ def fmt_parts(iso_time: str):
     return dt.strftime("%Y%m%d"), dt.strftime("%H"), dt
 
 
-def img(name: str, caption: str | None = None):
-    path = DATA_DIR / name
+def img(data_dir: Path, name: str, caption: str | None = None):
+    path = data_dir / name
     if path.exists():
         st.image(str(path), caption=caption, use_container_width=True)
     else:
         st.info(f"Görsel henüz üretilmemiş: {name}")
 
 
-manifest = load_manifest()
-
 st.title("🌦️ WRF İstanbul — Otomatik Meteoroloji Panosu")
 
-if manifest is None:
+available_dates = list_archive_dates()
+
+if not available_dates:
     st.warning(
         "Henüz veri yayınlanmamış. Altay HPC'deki otomasyon ilk günlük koşuyu "
         "tamamladığında burası dolacak."
     )
     st.stop()
+
+selected_date = st.sidebar.selectbox(
+    "📅 Arşiv Tarihi (simülasyon başlangıcı)", available_dates, index=0
+)
+DATA_DIR = ARCHIVE_ROOT / selected_date
+manifest = load_manifest(selected_date)
+
+if manifest is None:
+    st.error(f"{selected_date} için manifest.json bulunamadı.")
+    st.stop()
+
+st.sidebar.caption(f"Arşivde {len(available_dates)} tarih mevcut.")
 
 run_start = datetime.strptime(manifest["run_start"], "%Y-%m-%dT%H:%M:%S")
 run_end = datetime.strptime(manifest["run_end"], "%Y-%m-%dT%H:%M:%S")
@@ -96,45 +116,45 @@ tab_dash, tab_synop, tab_skewt, tab_summary, tab_precip, tab_meteo = st.tabs(
 
 with tab_dash:
     st.subheader(f"2m Sıcaklık · 10m Rüzgar · MSLP · Nem · Yağış · CAPE — {selected_label}")
-    img(f"dashboard_{date_part}_{hour_part}UTC.png")
+    img(DATA_DIR, f"dashboard_{date_part}_{hour_part}UTC.png")
 
 with tab_synop:
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("**Simüle Radar Yansıtırlığı**")
-        img(f"dbz_{date_part}_{hour_part}UTC.png")
+        img(DATA_DIR, f"dbz_{date_part}_{hour_part}UTC.png")
     with col2:
         st.markdown("**500 hPa Sinoptik**")
-        img(f"synoptic500_{date_part}_{hour_part}UTC.png")
+        img(DATA_DIR, f"synoptic500_{date_part}_{hour_part}UTC.png")
     with col3:
         st.markdown("**Toplam Kolon Su Buharı (PWAT)**")
-        img(f"pwat_{date_part}_{hour_part}UTC.png")
+        img(DATA_DIR, f"pwat_{date_part}_{hour_part}UTC.png")
 
 with tab_skewt:
     st.subheader(f"İstanbul — Skew-T Log-P Sondajı — {selected_label}")
     _, sk_col, _ = st.columns([1, 2, 1])
     with sk_col:
-        img(f"skewt_istanbul_{date_part}_{hour_part}UTC.png")
+        img(DATA_DIR, f"skewt_istanbul_{date_part}_{hour_part}UTC.png")
 
 with tab_summary:
     st.subheader("24 Saatlik Özet Haritaları")
     col1, col2 = st.columns(2)
     with col1:
-        img("max_sicaklik_24saat.png")
-        img("max_ruzgar_24saat.png")
+        img(DATA_DIR, "max_sicaklik_24saat.png")
+        img(DATA_DIR, "max_ruzgar_24saat.png")
     with col2:
-        img("min_sicaklik_24saat.png")
-        img("toplam_yagis_24saat.png")
+        img(DATA_DIR, "min_sicaklik_24saat.png")
+        img(DATA_DIR, "toplam_yagis_24saat.png")
 
 with tab_precip:
     st.subheader("6 Saatlik Yağış Animasyonu")
-    img("yagis_animasyon.gif")
+    img(DATA_DIR, "yagis_animasyon.gif")
 
 with tab_meteo:
     st.subheader("İstanbul — 24 Saatlik Meteogram")
     _, m_col, _ = st.columns([1, 3, 1])
     with m_col:
-        img("meteogram_istanbul.png")
+        img(DATA_DIR, "meteogram_istanbul.png")
 
 st.markdown("---")
 st.caption(
