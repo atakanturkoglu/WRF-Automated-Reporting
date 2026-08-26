@@ -1,0 +1,78 @@
+{
+  "tarih": "20260826",
+  "kontrol_zamani": "2026-08-26T22:40:53",
+  "genel_durum": "sağlıklı",
+  "ajanlar": [
+    {
+      "job_id": "515341",
+      "job_adi": "ajan1_indirme",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:03:36",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "07:40:48",
+      "ajan": "İndirme (GFS)"
+    },
+    {
+      "job_id": "515342",
+      "job_adi": "ajan2_wps",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:30",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "01:04:00",
+      "ajan": "WPS (ungrib+metgrid)"
+    },
+    {
+      "job_id": "515349",
+      "job_adi": "ajan3_wrf",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:06:49",
+      "zaman_limiti": "02:00:00",
+      "cpu_zamani": "14:32:32",
+      "ajan": "WRF (real+wrf.exe)"
+    },
+    {
+      "job_id": "515360",
+      "job_adi": "ajan4_viz",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:03:23",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "07:13:04",
+      "ajan": "Görselleştirme"
+    },
+    {
+      "job_id": "515363",
+      "job_adi": "ajan5_yorum",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:18",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "00:38:24",
+      "ajan": "AI Yorum"
+    },
+    {
+      "job_id": "515364",
+      "job_adi": "ajan6_yayinla",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:10",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "00:21:20",
+      "ajan": "Yayınlama"
+    },
+    {
+      "job_id": "515365",
+      "job_adi": "ajan7_temizlik",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:03",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "00:06:24",
+      "ajan": "Temizlik"
+    }
+  ],
+  "sorunlar": []
+}
