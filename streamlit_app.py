@@ -91,9 +91,30 @@ c3.metric("Simülasyon Aralığı", f'{run_start:%d %b} → {run_end:%d %b %Y}')
 c4.metric("Son Güncelleme", generated_at[:16].replace("T", " "))
 
 st.caption(
-    "Sınır koşulu: ERA5 (Copernicus CDS)  ·  Model: WRF-ARW 4.4, Lambert projeksiyonu  ·  "
+    "Sınır koşulu: GFS (NCEP)  ·  Model: WRF-ARW 4.4, 3km, Lambert projeksiyonu  ·  "
     "Otomatik olarak İTÜ UHeM Altay HPC üzerinde üretilir."
 )
+
+durum_path = DATA_DIR / "durum.json"
+if durum_path.exists():
+    durum_data = json.loads(durum_path.read_text())
+    saglikli = durum_data.get("genel_durum") == "sağlıklı"
+    renk = "#1b3a2b" if saglikli else "#3a1b1b"
+    kenar = "#2ecc71" if saglikli else "#e74c3c"
+    ikon = "✅" if saglikli else "⚠️"
+    detay = "Tüm ajanlar sorunsuz tamamlandı." if saglikli else \
+        "; ".join(durum_data.get("sorunlar", [])) or "Detay yok."
+    st.markdown(
+        f"""
+        <div style="background-color:{renk}; border-left:4px solid {kenar};
+                    border-radius:6px; padding:10px 16px; margin:4px 0 16px 0; font-size:0.9em;">
+            {ikon} <b>Sistem Durumu: {durum_data.get('genel_durum', '—').capitalize()}</b>
+            — {detay}
+            <span style="color:#888; float:right;">Kontrol: {durum_data.get('kontrol_zamani', '—')[:16].replace('T',' ')}</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 yorum_path = DATA_DIR / "yorum.json"
 if yorum_path.exists():
@@ -114,23 +135,24 @@ if yorum_path.exists():
         unsafe_allow_html=True,
     )
 
-times = manifest["times"]
+times = manifest.get("detay_times", manifest["times"])
+ufuk_saat = manifest.get("ufuk_saat", 24)
 time_labels = [datetime.strptime(t, "%Y-%m-%dT%H:%M:%S").strftime("%d %b %H:%M UTC") for t in times]
-selected_label = st.sidebar.selectbox("Zaman Adımı", time_labels, index=len(time_labels) // 2)
+selected_label = st.sidebar.selectbox("Zaman Adımı (detaylı görseller)", time_labels, index=0)
 selected_time = times[time_labels.index(selected_label)]
 date_part, hour_part, _ = fmt_parts(selected_time)
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
     "**Hakkında**\n\n"
-    "Bu panel, İstanbul/Marmara bölgesi için Altay HPC üzerinde her gün otomatik "
-    "olarak çalıştırılan WRF-ARW simülasyonunun çıktılarını gösterir: sıcaklık, "
-    "rüzgar, nem, yağış, CAPE, sinoptik 500hPa durumu ve Skew-T sondajları."
+    "Bu panel, İstanbul için Altay HPC üzerinde her gün otomatik olarak "
+    "çalıştırılan 3km çözünürlüklü WRF-ARW simülasyonunun çıktılarını gösterir: "
+    "sıcaklık, rüzgar, nem, yağış, CAPE, sinoptik 500hPa durumu ve Skew-T sondajları."
 )
 
 tab_dash, tab_synop, tab_skewt, tab_summary, tab_precip, tab_meteo = st.tabs(
     ["📊 Genel Bakış", "🛰️ Sinoptik / Radar / Nem", "📈 Skew-T Sondaj",
-     "🗓️ 24 Saatlik Özet", "🌧️ Yağış Animasyonu", "📉 Meteogram"]
+     f"🗓️ {ufuk_saat} Saatlik Özet", "🌧️ Yağış Animasyonu", "📉 Meteogram"]
 )
 
 with tab_dash:
@@ -156,21 +178,21 @@ with tab_skewt:
         img(DATA_DIR, f"skewt_istanbul_{date_part}_{hour_part}UTC.png")
 
 with tab_summary:
-    st.subheader("24 Saatlik Özet Haritaları")
+    st.subheader(f"{ufuk_saat} Saatlik Özet Haritaları")
     col1, col2 = st.columns(2)
     with col1:
-        img(DATA_DIR, "max_sicaklik_24saat.png")
-        img(DATA_DIR, "max_ruzgar_24saat.png")
+        img(DATA_DIR, f"max_sicaklik_{ufuk_saat}saat.png")
+        img(DATA_DIR, f"max_ruzgar_{ufuk_saat}saat.png")
     with col2:
-        img(DATA_DIR, "min_sicaklik_24saat.png")
-        img(DATA_DIR, "toplam_yagis_24saat.png")
+        img(DATA_DIR, f"min_sicaklik_{ufuk_saat}saat.png")
+        img(DATA_DIR, f"toplam_yagis_{ufuk_saat}saat.png")
 
 with tab_precip:
-    st.subheader("6 Saatlik Yağış Animasyonu")
+    st.subheader("Saatlik Yağış Animasyonu")
     img(DATA_DIR, "yagis_animasyon.gif")
 
 with tab_meteo:
-    st.subheader("İstanbul — 24 Saatlik Meteogram")
+    st.subheader(f"İstanbul — {ufuk_saat} Saatlik Meteogram")
     _, m_col, _ = st.columns([1, 3, 1])
     with m_col:
         img(DATA_DIR, "meteogram_istanbul.png")
