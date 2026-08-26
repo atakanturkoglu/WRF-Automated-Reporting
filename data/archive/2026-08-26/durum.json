@@ -1,6 +1,6 @@
 {
   "tarih": "20260826",
-  "kontrol_zamani": "2026-08-26T22:40:53",
+  "kontrol_zamani": "2026-08-26T22:43:52",
   "genel_durum": "sağlıklı",
   "ajanlar": [
     {
@@ -54,24 +54,14 @@
       "ajan": "AI Yorum"
     },
     {
-      "job_id": "515364",
+      "job_id": "515368",
       "job_adi": "ajan6_yayinla",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
-      "gecen_sure": "00:00:10",
+      "gecen_sure": "00:00:23",
       "zaman_limiti": "00:10:00",
-      "cpu_zamani": "00:21:20",
+      "cpu_zamani": "00:49:04",
       "ajan": "Yayınlama"
-    },
-    {
-      "job_id": "515365",
-      "job_adi": "ajan7_temizlik",
-      "durum": "COMPLETED",
-      "cikis_kodu": "0:0",
-      "gecen_sure": "00:00:03",
-      "zaman_limiti": "00:10:00",
-      "cpu_zamani": "00:06:24",
-      "ajan": "Temizlik"
     }
   ],
   "sorunlar": []
