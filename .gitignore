@@ -1,0 +1,13 @@
+# Sırlar / API anahtarları asla bu repoya girmemeli
+*.key
+*_api_key
+*.pem
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+
+# Sistem
+.DS_Store

@@ -95,6 +95,25 @@ st.caption(
     "Otomatik olarak İTÜ UHeM Altay HPC üzerinde üretilir."
 )
 
+yorum_path = DATA_DIR / "yorum.json"
+if yorum_path.exists():
+    yorum_data = json.loads(yorum_path.read_text())
+    st.markdown(
+        f"""
+        <div style="background-color:#111827; border-left:4px solid #90caf9;
+                    border-radius:6px; padding:16px 20px; margin:12px 0 20px 0;">
+            <div style="color:#90caf9; font-weight:600; font-size:0.85em;
+                        text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
+                🤖 Yapay Zeka Meteorolojik Yorumu
+            </div>
+            <div style="color:#e0e0e0; font-size:1.02em; line-height:1.6;">
+                {yorum_data['yorum']}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 times = manifest["times"]
 time_labels = [datetime.strptime(t, "%Y-%m-%dT%H:%M:%S").strftime("%d %b %H:%M UTC") for t in times]
 selected_label = st.sidebar.selectbox("Zaman Adımı", time_labels, index=len(time_labels) // 2)
