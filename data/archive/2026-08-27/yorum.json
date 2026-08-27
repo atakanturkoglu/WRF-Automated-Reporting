@@ -1,6 +1,18 @@
 {
-  "yorum": "İstanbul’da önümüzdeki iki gün boyunca hava sıcaklıklarının 20.2°C ile 29.3°C arasında seyretmesi bekleniyor. 28 Ağustos Cuma öğleden sonra yakın çevrede kısa süreli yerel sağanak ihtimali bulunsa da kent genelinde önemli bir yağış beklenmiyor ve toplam yağış miktarının yalnızca 0.1 mm civarında kalacağı tahmin ediliyor. Rüzgarın ise zaman zaman serinletici bir etkiyle eserek en yüksek 7.1 m/s hıza ulaşması öngörülüyor.",
+  "yorum": "İstanbul genelinde önümüzdeki 48 saat boyunca sıcaklıkların 20 ile 29 derece arasında seyretmesi beklenirken, bölge genelinde dik dik düşen güneşle birlikte en yüksek sıcaklık 34.7 dereceye kadar ulaşacak. Rüzgar kent genelinde zaman zaman saatte 7.1 m/s hıza ulaşarak tatlı bir serinlik sağlayacak. İl genelinde büyük bir yağış kütlesi beklenmese de atmosferik hareketliliğe bağlı olarak **yarın öğleden sonra Arnavutköy ve Şile** çevrelerinde kısa süreli yerel sağanak geçişleri görülebilir. Diğer ilçelerimizde ise havanın çoğunlukla az bulutlu ve sakin geçeceğini tahmin ediyoruz.",
   "model": "gemini-3.6-flash",
+  "ilce_yagis_one_cikanlar": [
+    {
+      "ilce": "Arnavutköy",
+      "zaman": "yarın öğleden sonra",
+      "mm": 2.6
+    },
+    {
+      "ilce": "Şile",
+      "zaman": "yarın öğleden sonra",
+      "mm": 1.7
+    }
+  ],
   "stats": {
     "times": [
       "2026-08-27T00:00:00",

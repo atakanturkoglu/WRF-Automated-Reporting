@@ -129,6 +129,17 @@ if durum_path.exists():
 yorum_path = DATA_DIR / "yorum.json"
 if yorum_path.exists():
     yorum_data = json.loads(yorum_path.read_text())
+    ilce_rozetleri = ""
+    ilceler = yorum_data.get("ilce_yagis_one_cikanlar", [])
+    if ilceler:
+        rozetler = "".join(
+            f'<span style="background-color:#0d2438; border:1px solid #2f5d7a; '
+            f'border-radius:14px; padding:4px 12px; margin:3px 6px 3px 0; '
+            f'display:inline-block; font-size:0.85em; color:#8ecbe6;">'
+            f'📍 <b>{i["ilce"]}</b> — {i["zaman"]} ({i["mm"]} mm)</span>'
+            for i in ilceler
+        )
+        ilce_rozetleri = f'<div style="margin-top:10px;">{rozetler}</div>'
     st.markdown(
         f"""
         <div style="background-color:#111827; border-left:4px solid #90caf9;
@@ -140,6 +151,7 @@ if yorum_path.exists():
             <div style="color:#e0e0e0; font-size:1.02em; line-height:1.6;">
                 {yorum_data['yorum']}
             </div>
+            {ilce_rozetleri}
         </div>
         """,
         unsafe_allow_html=True,
