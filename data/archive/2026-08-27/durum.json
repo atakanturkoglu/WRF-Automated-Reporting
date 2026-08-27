@@ -1,76 +1,83 @@
 {
   "tarih": "20260827",
-  "kontrol_zamani": "2026-08-27T09:37:09",
+  "kontrol_zamani": "2026-08-27T09:49:16",
   "genel_durum": "sağlıklı",
   "ajanlar": [
     {
       "job_id": "515478",
-      "job_adi": "ajan1_indirme",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:03:29",
       "zaman_limiti": "00:30:00",
       "cpu_zamani": "07:25:52",
+      "submit": "2026-08-27T09:19:16",
+      "job_adi": "ajan1_indirme",
       "ajan": "İndirme (GFS)"
     },
     {
       "job_id": "515479",
-      "job_adi": "ajan2_wps",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:00:32",
       "zaman_limiti": "00:30:00",
       "cpu_zamani": "01:08:16",
+      "submit": "2026-08-27T09:19:16",
+      "job_adi": "ajan2_wps",
       "ajan": "WPS (ungrib+metgrid)"
     },
     {
       "job_id": "515480",
-      "job_adi": "ajan3_wrf",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:06:51",
       "zaman_limiti": "02:00:00",
       "cpu_zamani": "14:36:48",
+      "submit": "2026-08-27T09:19:17",
+      "job_adi": "ajan3_wrf",
       "ajan": "WRF (real+wrf.exe)"
     },
     {
       "job_id": "515481",
-      "job_adi": "ajan4_viz",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:03:33",
       "zaman_limiti": "00:30:00",
       "cpu_zamani": "07:34:24",
+      "submit": "2026-08-27T09:19:17",
+      "job_adi": "ajan4_viz",
       "ajan": "Görselleştirme"
     },
     {
       "job_id": "515482",
-      "job_adi": "ajan5_yorum",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:00:26",
       "zaman_limiti": "00:10:00",
       "cpu_zamani": "00:55:28",
+      "submit": "2026-08-27T09:19:17",
+      "job_adi": "ajan5_yorum",
       "ajan": "AI Yorum"
     },
     {
       "job_id": "515483",
-      "job_adi": "ajan6_yayinla",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:00:20",
       "zaman_limiti": "00:10:00",
       "cpu_zamani": "00:42:40",
+      "submit": "2026-08-27T09:19:18",
+      "job_adi": "ajan6_yayinla",
       "ajan": "Yayınlama"
     },
     {
       "job_id": "515484",
-      "job_adi": "ajan7_temizlik",
       "durum": "COMPLETED",
       "cikis_kodu": "0:0",
       "gecen_sure": "00:00:04",
       "zaman_limiti": "00:10:00",
       "cpu_zamani": "00:08:32",
+      "submit": "2026-08-27T09:19:18",
+      "job_adi": "ajan7_temizlik",
       "ajan": "Temizlik"
     }
   ],
