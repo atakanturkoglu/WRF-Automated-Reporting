@@ -44,8 +44,18 @@ def load_manifest(date_str: str):
     return json.loads(path.read_text())
 
 
-def fmt_parts(iso_time: str):
-    dt = datetime.strptime(iso_time, "%Y-%m-%dT%H:%M:%S")
+def parse_time(t: str) -> datetime:
+    """WRF'in kendi zaman formatı ('_' ayraçlı) ile eski ISO formatı ('T' ayraçlı) ikisini de kabul eder."""
+    for fmt in ("%Y-%m-%d_%H:%M:%S", "%Y-%m-%dT%H:%M:%S"):
+        try:
+            return datetime.strptime(t, fmt)
+        except ValueError:
+            continue
+    raise ValueError(f"Tanınmayan zaman formatı: {t}")
+
+
+def fmt_parts(time_str: str):
+    dt = parse_time(time_str)
     return dt.strftime("%Y%m%d"), dt.strftime("%H"), dt
 
 
@@ -80,8 +90,8 @@ if manifest is None:
 
 st.sidebar.caption(f"Arşivde {len(available_dates)} tarih mevcut.")
 
-run_start = datetime.strptime(manifest["run_start"], "%Y-%m-%dT%H:%M:%S")
-run_end = datetime.strptime(manifest["run_end"], "%Y-%m-%dT%H:%M:%S")
+run_start = parse_time(manifest["run_start"])
+run_end = parse_time(manifest["run_end"])
 generated_at = manifest.get("generated_at", "—")
 
 c1, c2, c3, c4 = st.columns(4)
@@ -137,7 +147,7 @@ if yorum_path.exists():
 
 times = manifest.get("detay_times", manifest["times"])
 ufuk_saat = manifest.get("ufuk_saat", 24)
-time_labels = [datetime.strptime(t, "%Y-%m-%dT%H:%M:%S").strftime("%d %b %H:%M UTC") for t in times]
+time_labels = [parse_time(t).strftime("%d %b %H:%M UTC") for t in times]
 selected_label = st.sidebar.selectbox("Zaman Adımı (detaylı görseller)", time_labels, index=0)
 selected_time = times[time_labels.index(selected_label)]
 date_part, hour_part, _ = fmt_parts(selected_time)
