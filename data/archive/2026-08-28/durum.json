@@ -1,0 +1,85 @@
+{
+  "tarih": "20260828",
+  "kontrol_zamani": "2026-08-28T18:20:39",
+  "genel_durum": "sağlıklı",
+  "ajanlar": [
+    {
+      "job_id": "516101",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:03:25",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "07:17:20",
+      "submit": "2026-08-28T18:00:15",
+      "job_adi": "ajan1_indirme",
+      "ajan": "İndirme (GFS)"
+    },
+    {
+      "job_id": "516103",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:47",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "01:40:16",
+      "submit": "2026-08-28T18:00:16",
+      "job_adi": "ajan2_wps",
+      "ajan": "WPS (ungrib+metgrid)"
+    },
+    {
+      "job_id": "516104",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:07:16",
+      "zaman_limiti": "02:00:00",
+      "cpu_zamani": "15:30:08",
+      "submit": "2026-08-28T18:00:16",
+      "job_adi": "ajan3_wrf",
+      "ajan": "WRF (real+wrf.exe)"
+    },
+    {
+      "job_id": "516105",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:04:46",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "10:10:08",
+      "submit": "2026-08-28T18:00:16",
+      "job_adi": "ajan4_viz",
+      "ajan": "Görselleştirme"
+    },
+    {
+      "job_id": "516106",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:01:03",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "02:14:24",
+      "submit": "2026-08-28T18:00:17",
+      "job_adi": "ajan5_yorum",
+      "ajan": "AI Yorum"
+    },
+    {
+      "job_id": "516107",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:29",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "01:01:52",
+      "submit": "2026-08-28T18:00:17",
+      "job_adi": "ajan6_yayinla",
+      "ajan": "Yayınlama"
+    },
+    {
+      "job_id": "516108",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:04",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "00:08:32",
+      "submit": "2026-08-28T18:00:17",
+      "job_adi": "ajan7_temizlik",
+      "ajan": "Temizlik"
+    }
+  ],
+  "sorunlar": []
+}
