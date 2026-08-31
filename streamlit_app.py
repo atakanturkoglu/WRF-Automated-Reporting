@@ -67,6 +67,16 @@ def img(data_dir: Path, name: str, caption: str | None = None):
         st.info(f"Görsel henüz üretilmemiş: {name}")
 
 
+def video(data_dir: Path, name: str, caption: str | None = None):
+    path = data_dir / name
+    if path.exists():
+        st.video(str(path))
+        if caption:
+            st.caption(caption)
+        return True
+    return False
+
+
 st.title("🌦️ WRF İstanbul — Otomatik Meteoroloji Panosu")
 
 available_dates = list_archive_dates()
@@ -211,7 +221,10 @@ with tab_summary:
 
 with tab_precip:
     st.subheader("Saatlik Yağış Animasyonu")
-    img(DATA_DIR, "yagis_animasyon.gif")
+    # MP4 (durdur/geri sar/ilerleme çubuğu) öncelikli; eski günlerde sadece
+    # GIF olabilir (bu özellik eklenmeden önce üretilmiş), ona geri düşülür.
+    if not video(DATA_DIR, "yagis_animasyon.mp4"):
+        img(DATA_DIR, "yagis_animasyon.gif")
 
 with tab_meteo:
     st.subheader(f"İstanbul — {ufuk_saat} Saatlik Meteogram")
