@@ -1,7 +1,7 @@
 {
   "tarih": "20260901",
-  "kontrol_zamani": "2026-09-01T08:12:46",
-  "genel_durum": "sorunlu",
+  "kontrol_zamani": "2026-09-01T23:19:01",
+  "genel_durum": "sağlıklı",
   "ajanlar": [
     {
       "job_id": "517672",
@@ -15,24 +15,75 @@
       "ajan": "İndirme (GFS)"
     },
     {
-      "job_id": "517674",
-      "durum": "FAILED",
-      "cikis_kodu": "1:0",
-      "gecen_sure": "00:00:02",
+      "job_id": "518059",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:02:02",
       "zaman_limiti": "00:30:00",
-      "cpu_zamani": "00:04:16",
-      "submit": "2026-09-01T08:10:16",
+      "cpu_zamani": "04:20:16",
+      "submit": "2026-09-01T22:11:16",
       "job_adi": "ajan2_wps",
       "ajan": "WPS (ungrib+metgrid)"
+    },
+    {
+      "job_id": "518060",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:07:37",
+      "zaman_limiti": "02:00:00",
+      "cpu_zamani": "16:14:56",
+      "submit": "2026-09-01T22:11:16",
+      "job_adi": "ajan3_wrf",
+      "ajan": "WRF (real+wrf.exe)"
+    },
+    {
+      "job_id": "518061",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:05:39",
+      "zaman_limiti": "00:30:00",
+      "cpu_zamani": "12:03:12",
+      "submit": "2026-09-01T22:11:16",
+      "job_adi": "ajan4_viz",
+      "ajan": "Görselleştirme"
+    },
+    {
+      "job_id": "518062",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:54",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "01:55:12",
+      "submit": "2026-09-01T22:11:17",
+      "job_adi": "ajan5_yorum",
+      "ajan": "AI Yorum"
+    },
+    {
+      "job_id": "518063",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:00:46",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "01:38:08",
+      "submit": "2026-09-01T22:11:17",
+      "job_adi": "ajan6_yayinla",
+      "ajan": "Yayınlama"
+    },
+    {
+      "job_id": "518064",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:03:47",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "08:04:16",
+      "submit": "2026-09-01T22:11:18",
+      "job_adi": "ajan7_temizlik",
+      "ajan": "Temizlik"
     }
   ],
-  "sorunlar": [
-    "WPS (ungrib+metgrid) (job 517674): durum=FAILED, çıkış kodu=1:0",
-    "WRF (real+wrf.exe): bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
-    "Görselleştirme: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
-    "AI Yorum: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
-    "Yayınlama: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
-    "Temizlik: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)"
-  ],
-  "drive_arsiv": null
+  "sorunlar": [],
+  "drive_arsiv": {
+    "gfs": "basarili",
+    "wrfout": "basarili"
+  }
 }
