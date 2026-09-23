@@ -1,0 +1,51 @@
+{
+  "tarih": "20260923",
+  "kontrol_zamani": "2026-09-23T10:47:58",
+  "genel_durum": "sorunlu",
+  "ajanlar": [
+    {
+      "job_id": "527633",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:03:35",
+      "zaman_limiti": "02:30:00",
+      "cpu_zamani": "07:38:40",
+      "submit": "2026-09-23T08:00:02",
+      "job_adi": "ajan1_indirme",
+      "ajan": "İndirme (GFS)"
+    },
+    {
+      "job_id": "527634",
+      "durum": "FAILED",
+      "cikis_kodu": "1:0",
+      "gecen_sure": "00:00:02",
+      "zaman_limiti": "00:55:00",
+      "cpu_zamani": "00:04:16",
+      "submit": "2026-09-23T10:37:28",
+      "job_adi": "ajan2_wps",
+      "ajan": "WPS (ungrib+metgrid)"
+    },
+    {
+      "job_id": "527639",
+      "durum": "COMPLETED",
+      "cikis_kodu": "0:0",
+      "gecen_sure": "00:01:20",
+      "zaman_limiti": "00:10:00",
+      "cpu_zamani": "02:50:40",
+      "submit": "2026-09-23T08:00:05",
+      "job_adi": "ajan7_temizlik",
+      "ajan": "Temizlik"
+    }
+  ],
+  "sorunlar": [
+    "WPS (ungrib+metgrid) (job 527634): durum=FAILED, çıkış kodu=1:0",
+    "WRF (real+wrf.exe): bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
+    "Görselleştirme: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
+    "AI Yorum: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)",
+    "Yayınlama: bugün hiç çalıştırılmadı (muhtemelen önceki bir ajan başarısız oldu ve zincir orada durdu)"
+  ],
+  "drive_arsiv": {
+    "gfs": "basarili",
+    "wrfout": "atlandi"
+  }
+}
